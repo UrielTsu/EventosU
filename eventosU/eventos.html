@@ -1,26 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/normalize.css">
-   <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <script defer src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <title>Eventos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EventosU - Crear Evento</title>
+
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/estilos.css">
 </head>
-<header>
- <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">EventosU</a>
-    <a class="nav-link text-white" href="index.html">Inicio</a>
-    <a class="nav-link text-white" href="eventos.html">Eventos</a>
-    <a class="nav-link text-white" href="asistentes.html">Asistentes</a>
-    <a class="nav-link text-white" href="contacto.html">Contacto</a>
-  </div>
-</header>
-<body>
-    
+
+<body class="bg-light">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">EventosU</a>
+      <div class="navbar-nav">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link active" href="eventos.html"> Evento</a>
+        <a class="nav-link" href="asistentes.html">Asistentes</a>
+        <a class="nav-link" href="contacto.html">Contacto</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-4 mb-5">
+    <h2 class="mb-3 text-center">Crear Evento</h2>
+
+    <div id="alerta" class="mb-3"></div>
+
+    <div class="row g-4">
+      <!-- FORM -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <form id="formEvento" class="needs-validation" novalidate>
+              <div class="mb-3">
+                <label class="form-label">Título</label>
+                <input id="titulo" type="text" class="form-control" required minlength="5" placeholder="Ej. Conferencia de Software">
+                <div class="invalid-feedback">Mínimo 5 caracteres.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Sede</label>
+                <input id="sede" type="text" class="form-control" required minlength="3" placeholder="Ej. Auditorio Central">
+                <div class="invalid-feedback">Mínimo 3 caracteres.</div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Tipo</label>
+                  <select id="tipo" class="form-select" required>
+                    <option value="" selected disabled>Selecciona</option>
+                    <option value="conferencia">Conferencia</option>
+                    <option value="taller">Taller</option>
+                    <option value="curso">Curso</option>
+                    <option value="congreso">Congreso</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona un tipo.</div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label">Cupo</label>
+                  <input id="cupo" type="number" class="form-control" required min="1" max="9999" value="30">
+                  <div class="invalid-feedback">El cupo debe ser mayor a 0.</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Fecha</label>
+                  <input id="fecha" type="date" class="form-control" required>
+                  <div class="invalid-feedback">Selecciona una fecha válida.</div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary w-50">Guardar</button>
+                <button id="btnLimpiar" type="button" class="btn btn-outline-secondary w-50">Limpiar</button>
+              </div>
+            </form>
+
+            <div class="small text-muted mt-3">
+              Se guarda en localStorage con la clave <b>"eventos"</b>. En Inicio se mostrará automáticamente.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTA -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="m-0">Eventos guardados</h5>
+              <button id="btnResetDemo" class="btn btn-sm btn-outline-danger">Restaurar demo</button>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table class="table table-sm align-middle">
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Fecha</th>
+                    <th>Cupo</th>
+                    <th class="text-end">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaEventos"></tbody>
+              </table>
+            </div>
+
+            <div id="estadoVacio" class="text-center py-4 text-muted d-none">
+              No hay eventos aún. Crea uno.
+            </div>
+          </div>
+        </div>
+
+        <div class="alert alert-light border mt-3">
+          Tip: crea un evento y luego ve a <b>Inicio</b> para comprobar que aparece en el catálogo.
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/eventos.js"></script>
 </body>
 </html>
