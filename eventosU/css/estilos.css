@@ -7,25 +7,62 @@ display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
-
-
-.search-container {
-    position: relative;
+/*ESTILOS DEL FORMULARIO DE CONTACTO*/
+.contenedor {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
 }
 
-.search-input {
-    padding: 1rem 2.5rem 1rem 1rem !important;
-    font-size: 1.1rem !important;
-    height: 3rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo {
+    margin-bottom: 15px;
+}
+
+.label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+}
+
+.input,
+.textarea {
     width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-.search-icon {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #6c757d;
+.input:focus,
+.textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.boton {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #0056b3;
 }
