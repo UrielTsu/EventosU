@@ -8,6 +8,15 @@ display: grid;
     gap: 2rem;
 }
 
+/*estilos cards  */
+.card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
 .contenedor {
     background-color: #ffffff;
     padding: 30px;
