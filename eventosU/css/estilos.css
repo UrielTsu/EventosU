@@ -7,7 +7,7 @@ display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
-/*ESTILOS DEL FORMULARIO DE CONTACTO*/
+
 .contenedor {
     background-color: #ffffff;
     padding: 30px;
@@ -66,3 +66,4 @@ display: grid;
 .boton:hover {
     background-color: #0056b3;
 }
+/*hola*/
