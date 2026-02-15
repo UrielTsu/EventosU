@@ -67,3 +67,72 @@ display: grid;
     background-color: #0056b3;
 }
 /*hola*/
+/* ===== Página Asistentes ===== */
+
+.contenedor-asistentes {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.panel-asistentes {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    width: 900px;
+}
+
+.selector-evento {
+    margin-bottom: 20px;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla th,
+.tabla td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.tabla th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.btn-accion {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 2px;
+}
+
+.confirmar {
+    background-color: #28a745;
+    color: white;
+}
+
+.eliminar {
+    background-color: #dc3545;
+    color: white;
+}
+
+.exportar {
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.exportar:hover {
+    opacity: 0.9;
+}

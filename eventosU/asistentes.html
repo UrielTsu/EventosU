@@ -20,7 +20,44 @@
     <a class="nav-link text-white" href="contacto.html">Contacto</a>
   </div>
 </header>
-<body>
-    
+<body class="body">
+
+<div class="contenedor-asistentes">
+    <div class="panel-asistentes">
+
+        <h2 class="titulo">Administración de Asistentes</h2>
+
+        <!-- Selector de Evento -->
+        <div class="selector-evento">
+            <label for="evento" class="label">Seleccionar Evento:</label>
+            <select id="evento" class="input">
+                <option value="evento1">Evento 1</option>
+                <option value="evento2">Evento 2</option>
+                <option value="evento3">Evento 3</option>
+            </select>
+        </div>
+
+        <!-- Tabla -->
+        <table class="tabla" id="tablaAsistentes">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Se llena dinámicamente -->
+            </tbody>
+        </table>
+
+        <button class="exportar" id="btnExportar">Exportar a TXT</button>
+
+    </div>
+</div>
+
+<script src="asistencia.js"></script>
 </body>
 </html>
