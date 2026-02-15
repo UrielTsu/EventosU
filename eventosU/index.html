@@ -3,133 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap-grid.min.css">
+    <title>EventosU - Inicio</title>
     <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-    <script defer src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-    <title>Eventos</title>
+    <link rel="stylesheet" href="css/estilos.css">
 </head>
-<header>
- <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="index.html">EventosU</a>
-    <a class="nav-link text-white" href="index.html">Inicio</a>
-    <a class="nav-link text-white" href="eventos.html">Eventos</a>
-    <a class="nav-link text-white" href="asistentes.html">Asistentes</a>
-    <a class="nav-link text-white" href="contacto.html">Contacto</a>
-  </div>
-        <div class="search-bar">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                 <div class="search-container">
-                    <input type="text" class="form-control search-input" placeholder="Search...">
-                    <i class="fas fa-search search-icon"></i>
-                 </div>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">EventosU</a>
+            <div class="navbar-nav">
+                <a class="nav-link active" href="index.html">Inicio</a>
+                <a class="nav-link" href="eventos.html">Crear Evento</a>
+                <a class="nav-link" href="asistentes.html">Asistentes</a>
+                <a class="nav-link" href="contacto.html">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="mb-4 text-center">Catálogo de Eventos</h2>
+        
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <input type="text" id="busquedaTexto" class="form-control" placeholder="Buscar por título o sede...">
+            </div>
+            <div class="col-md-3">
+                <select id="filtroTipo" class="form-select">
+                    <option value="">Todos los tipos</option>
+                    <option value="conferencia">Conferencia</option>
+                    <option value="taller">Taller</option>
+                    <option value="curso">Curso</option>
+                    <option value="congreso">Congreso</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="date" id="filtroFecha" class="form-control">
+            </div>
+        </div>
+
+        <div id="contenedorEventos" class="row"></div>
+    </div>
+
+    <div class="modal fade" id="modalInscripcion" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tituloEventoModal">Inscribirme</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formInscripcion">
+                        <input type="hidden" id="idEventoSeleccionado">
+                        <div class="mb-3">
+                            <label class="form-label">Nombre Completo</label>
+                            <input type="text" id="nombreAsistente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" id="emailAsistente" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Teléfono</label>
+                            <input type="tel" id="telefonoAsistente" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Confirmar Inscripción</button>
+                    </form>
                 </div>
             </div>
         </div>
-</div>
-</header>
-
-<body class="body" >
-
-<div class="container mt-4">
-   <div class="grid">
-    <!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 1</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-             </div>
-<!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 2</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-            </div>
-            <!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 3</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-           </div>
-<!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 4</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-            </div>
-
-
-    <!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 1</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-             </div>
-<!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 2</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-            </div>
-            <!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 3</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-           </div>
-<!--card-->
-            <div class="card text-center mb-3" style="width: 18rem;">
-                <div class="card-body">
-                 <h5 class="card-title">Evento 4</h5>
-                 <p class="card-text">Título</p>
-                 <p class="card-text">Fecha</p>
-                 <p class="card-text">Sede</p>
-                 <p class="card-text">Tipo</p>
-                 <a href="#" class="btn btn-primary">Inscribirme</a>
-                </div>
-            </div>
     </div>
-</div>
 
+    <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/inscripciones.js"></script>
 </body>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </html>
