@@ -10,27 +10,14 @@ function guardarEventos(lista) {
 }
 
 function seedDemo() {
+  // OJO: ahora usamos fecha con hora (datetime-local)
   const demo = [
-    { id: 1, titulo: "Taller de Ciberseguridad", fecha: "2025-09-18", sede: "Aula Magna FCC", tipo: "taller", cupoRestante: 5 },
-    { id: 2, titulo: "Congreso de IA", fecha: "2025-10-20", sede: "Auditorio Central", tipo: "congreso", cupoRestante: 0 }
+    { id: 1, titulo: "Taller de Ciberseguridad", fecha: "2026-03-10T10:00", sede: "Aula Magna FCC", tipo: "taller", cupoRestante: 5 },
+    { id: 2, titulo: "Congreso de IA", fecha: "2026-03-20T09:30", sede: "Auditorio Central", tipo: "congreso", cupoRestante: 0 }
   ];
   guardarEventos(demo);
   return demo;
 }
-
-// Si no hay nada en LS, crea demo (igual a tu inscripciones.js)
-let eventos = obtenerEventos();
-if (!Array.isArray(eventos) || eventos.length === 0) {
-  eventos = seedDemo();
-}
-
-const form = document.getElementById("formEvento");
-const tabla = document.getElementById("tablaEventos");
-const alerta = document.getElementById("alerta");
-const estadoVacio = document.getElementById("estadoVacio");
-
-const btnLimpiar = document.getElementById("btnLimpiar");
-const btnResetDemo = document.getElementById("btnResetDemo");
 
 function tipoLabel(tipo) {
   const map = {
@@ -51,14 +38,37 @@ function showAlert(msg, type = "success") {
   `;
 }
 
-function esFechaFutura(fechaYYYYMMDD) {
-  // compara por día (00:00) para que "hoy" no pase
-  const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
-
-  const f = new Date(fechaYYYYMMDD + "T00:00:00");
-  return f.getTime() > hoy.getTime();
+function esFechaHoraFutura(dtLocal) {
+  // dtLocal: "YYYY-MM-DDTHH:mm"
+  const f = new Date(dtLocal);
+  return !Number.isNaN(f.getTime()) && f.getTime() > Date.now();
 }
+
+function formatDateTime(dtLocal) {
+  // dtLocal "YYYY-MM-DDTHH:mm" -> bonito
+  const d = new Date(dtLocal);
+  return d.toLocaleString("es-MX", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+// Si no hay nada en LS, crea demo
+let eventos = obtenerEventos();
+if (!Array.isArray(eventos) || eventos.length === 0) {
+  eventos = seedDemo();
+}
+
+const form = document.getElementById("formEvento");
+const tabla = document.getElementById("tablaEventos");
+const alerta = document.getElementById("alerta");
+const estadoVacio = document.getElementById("estadoVacio");
+
+const btnLimpiar = document.getElementById("btnLimpiar");
+const btnResetDemo = document.getElementById("btnResetDemo");
 
 function renderTabla() {
   tabla.innerHTML = "";
@@ -71,13 +81,13 @@ function renderTabla() {
 
   eventos
     .slice()
-    .sort((a, b) => a.fecha.localeCompare(b.fecha))
+    .sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)))
     .forEach(ev => {
       tabla.innerHTML += `
         <tr>
           <td>${escapeHtml(ev.titulo)}</td>
           <td><span class="badge text-bg-info">${escapeHtml(tipoLabel(ev.tipo))}</span></td>
-          <td>${escapeHtml(ev.fecha)}</td>
+          <td>${escapeHtml(formatDateTime(ev.fecha))}</td>
           <td>${Number(ev.cupoRestante)}</td>
           <td class="text-end">
             <button class="btn btn-sm btn-outline-danger" onclick="eliminarEvento(${ev.id})">Eliminar</button>
@@ -89,8 +99,6 @@ function renderTabla() {
 
 // Para usarlo en onclick
 window.eliminarEvento = function(id) {
-  // OJO: si ya hay asistentes registrados para ese evento, tú decides si permites borrar.
-  // Aquí sí permite borrar.
   eventos = eventos.filter(e => e.id !== id);
   guardarEventos(eventos);
   renderTabla();
@@ -117,11 +125,11 @@ form.addEventListener("submit", (e) => {
   const sede = document.getElementById("sede").value.trim();
   const tipo = document.getElementById("tipo").value;
   const cupo = Number(document.getElementById("cupo").value);
-  const fecha = document.getElementById("fecha").value;
+  const fecha = document.getElementById("fecha").value; // "YYYY-MM-DDTHH:mm"
 
   // Validaciones extra (además de Bootstrap)
-  if (!esFechaFutura(fecha)) {
-    showAlert("La fecha debe ser futura (mayor a hoy).", "danger");
+  if (!esFechaHoraFutura(fecha)) {
+    showAlert("La fecha y hora deben ser futuras (mayor a este momento).", "danger");
     return;
   }
   if (!(cupo > 0)) {
@@ -130,7 +138,7 @@ form.addEventListener("submit", (e) => {
   }
   if (!form.checkValidity()) return;
 
-  // Generar ID: máximo + 1 (simple y estable)
+  // Generar ID: máximo + 1
   const nextId = eventos.length ? Math.max(...eventos.map(e => e.id)) + 1 : 1;
 
   const nuevo = {

@@ -23,7 +23,7 @@ function renderizarCards(lista) {
                         <h5 class="card-title text-primary">${ev.titulo}</h5>
                         <p class="card-text"><strong>Sede:</strong> ${ev.sede}</p>
                         <p class="card-text"><strong>Tipo:</strong> <span class="badge bg-info text-dark">${ev.tipo}</span></p>
-                        <p class="card-text"><strong>Fecha:</strong> ${ev.fecha}</p>
+                       <p class="card-text"><strong>Fecha:</strong> ${ev.fecha.replace("T", ", ")}</p>
                         <p class="card-text"><strong>Cupo restante:</strong> ${ev.cupoRestante}</p>
                         <button class="btn btn-primary w-100" 
                             ${ev.cupoRestante === 0 ? 'disabled' : ''} 
@@ -53,7 +53,7 @@ function filtrar() {
     const filtrados = eventos.filter(ev => {
         const matchT = ev.titulo.toLowerCase().includes(texto) || ev.sede.toLowerCase().includes(texto);
         const matchTipo = tipo === "" || ev.tipo === tipo;
-        const matchF = fecha === "" || ev.fecha === fecha;
+       const matchF = fecha === "" || (ev.fecha && ev.fecha.slice(0, 10) === fecha);
         return matchT && matchTipo && matchF;
     });
     renderizarCards(filtrados);
