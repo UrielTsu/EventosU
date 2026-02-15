@@ -1,11 +1,13 @@
 // Carga inicial de datos [cite: 41]
-let eventos = JSON.parse(localStorage.getItem('eventos')) || [
+let eventos = JSON.parse(localStorage.getItem('eventos'));
+
+if (!Array.isArray(eventos) || eventos.length === 0) {
+  eventos = [
     { id: 1, titulo: 'Taller de Ciberseguridad', fecha: '2025-09-18', sede: 'Aula Magna FCC', tipo: 'taller', cupoRestante: 5 },
-    { id: 2, titulo: 'Congreso de IA', fecha: '2025-10-20', sede: 'Auditorio Central', tipo: 'congreso', cupoRestante: 10 },
-    { id: 3, titulo: 'Seminario de Energías Renovables', fecha: '2025-11-15', sede: 'Sala de Conferencias', tipo: 'seminario', cupoRestante: 10 },
-    { id: 4, titulo: 'Taller de Robótica', fecha: '2025-12-05', sede: 'Laboratorio de Robótica', tipo: 'taller', cupoRestante: 3 },
-    { id: 5, titulo: 'Congreso de Innovación Tecnológica', fecha: '2026-01-10', sede: 'Centro de Convenciones', tipo: 'congreso', cupoRestante: 8 }
-];
+    { id: 2, titulo: 'Congreso de IA', fecha: '2025-10-20', sede: 'Auditorio Central', tipo: 'congreso', cupoRestante: 0 }
+  ];
+  localStorage.setItem('eventos', JSON.stringify(eventos)); 
+}
 
 const contenedor = document.getElementById('contenedorEventos');
 const modalElement = document.getElementById('modalInscripcion');
