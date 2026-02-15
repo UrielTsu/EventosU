@@ -1,26 +1,62 @@
-// Datos simulados por evento
-const eventos = {
-    evento1: [
-        { id: 1, nombre: "Juan Pérez", email: "juan@mail.com", estado: "Pendiente" },
-        { id: 2, nombre: "Ana López", email: "ana@mail.com", estado: "Pendiente" }
-    ],
-    evento2: [
-        { id: 3, nombre: "Carlos Ruiz", email: "carlos@mail.com", estado: "Pendiente" }
-    ],
-    evento3: []
-};
+// ========= EventosU - Administración de Asistentes =========
+
+const CLAVE_EVENTOS = "eventos";
+const CLAVE_ASISTENTES = "asistentes";
 
 const selectorEvento = document.getElementById("evento");
 const tablaBody = document.querySelector("#tablaAsistentes tbody");
 const btnExportar = document.getElementById("btnExportar");
 
+// ===== Utilidades =====
+function obtenerEventos() {
+    return JSON.parse(localStorage.getItem(CLAVE_EVENTOS)) || [];
+}
+
+function obtenerAsistentes() {
+    return JSON.parse(localStorage.getItem(CLAVE_ASISTENTES)) || [];
+}
+
+function guardarAsistentes(lista) {
+    localStorage.setItem(CLAVE_ASISTENTES, JSON.stringify(lista));
+}
+
+// ===== Cargar eventos en select =====
+function cargarEventos() {
+    const eventos = obtenerEventos();
+    selectorEvento.innerHTML = "";
+
+    if (eventos.length === 0) {
+        const opt = document.createElement("option");
+        opt.textContent = "No hay eventos";
+        selectorEvento.appendChild(opt);
+        return;
+    }
+
+    eventos.forEach(ev => {
+        const option = document.createElement("option");
+        option.value = ev.id;
+        option.textContent = `${ev.titulo} (${ev.fecha})`;
+        selectorEvento.appendChild(option);
+    });
+}
+
+// ===== Renderizar tabla =====
 function cargarTabla() {
-    const eventoSeleccionado = selectorEvento.value;
-    const asistentes = eventos[eventoSeleccionado];
+    const idEvento = Number(selectorEvento.value);
+    const asistentes = obtenerAsistentes().filter(a => a.idEvento === idEvento);
 
     tablaBody.innerHTML = "";
 
-    asistentes.forEach((asistente, index) => {
+    if (asistentes.length === 0) {
+        tablaBody.innerHTML = `
+            <tr>
+                <td colspan="5">No hay asistentes registrados.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    asistentes.forEach(asistente => {
         const fila = document.createElement("tr");
 
         fila.innerHTML = `
@@ -34,28 +70,44 @@ function cargarTabla() {
             </td>
         `;
 
-        // Confirmar asistencia
         fila.querySelector(".confirmar").addEventListener("click", () => {
-            asistente.estado = "Confirmado";
-            cargarTabla();
+            actualizarEstado(asistente.id, "Confirmado");
         });
 
-        // Eliminar registro
         fila.querySelector(".eliminar").addEventListener("click", () => {
-            asistentes.splice(index, 1);
-            cargarTabla();
+            if (confirm("¿Eliminar este asistente?")) {
+                eliminarAsistente(asistente.id);
+            }
         });
 
         tablaBody.appendChild(fila);
     });
 }
 
+// ===== Acciones =====
+function actualizarEstado(id, nuevoEstado) {
+    const lista = obtenerAsistentes();
+    const asistente = lista.find(a => a.id === id);
+    if (asistente) {
+        asistente.estado = nuevoEstado;
+        guardarAsistentes(lista);
+        cargarTabla();
+    }
+}
+
+function eliminarAsistente(id) {
+    let lista = obtenerAsistentes();
+    lista = lista.filter(a => a.id !== id);
+    guardarAsistentes(lista);
+    cargarTabla();
+}
+
+// ===== Exportar TXT =====
 function exportarTXT() {
-    const eventoSeleccionado = selectorEvento.value;
-    const asistentes = eventos[eventoSeleccionado];
+    const idEvento = Number(selectorEvento.value);
+    const asistentes = obtenerAsistentes().filter(a => a.idEvento === idEvento);
 
     let contenido = "ID\tNombre\tEmail\tEstado\n";
-
     asistentes.forEach(a => {
         contenido += `${a.id}\t${a.nombre}\t${a.email}\t${a.estado}\n`;
     });
@@ -67,7 +119,10 @@ function exportarTXT() {
     enlace.click();
 }
 
+// ===== Eventos =====
 selectorEvento.addEventListener("change", cargarTabla);
 btnExportar.addEventListener("click", exportarTXT);
 
+// ===== Inicializar =====
+cargarEventos();
 cargarTabla();
