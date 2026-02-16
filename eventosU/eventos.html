@@ -14,11 +14,16 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">EventosU</a>
-      <div class="navbar-nav">
-        <a class="nav-link" href="index.html">Inicio</a>
-        <a class="nav-link active" href="eventos.html">Crear Evento</a>
-        <a class="nav-link" href="asistentes.html">Asistentes</a>
-        <a class="nav-link" href="contacto.html">Contacto</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link" href="index.html">Inicio</a>
+          <a class="nav-link active" href="eventos.html">Evento</a>
+          <a class="nav-link" href="asistentes.html">Asistentes</a>
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </div>
       </div>
     </div>
   </nav>
@@ -30,9 +35,9 @@
 
     <div class="row g-4">
       <!-- FORM -->
-      <div class="col-lg-6">
-        <div class="card shadow-sm">
-          <div class="card-body">
+      <div class=" col-lg-6">
+        <div class="card bg-white shadow-sm">
+          <div class="card-body bg-white">
             <form id="formEvento" class="needs-validation" novalidate>
               <div class="mb-3">
                 <label class="form-label">Título</label>
@@ -86,9 +91,9 @@
       </div>
 
       <!-- LISTA -->
-      <div class="col-lg-6">
-        <div class="card shadow-sm">
-          <div class="card-body">
+      <div class=" col-lg-6">
+        <div class="card bg-light shadow-sm">
+          <div class="card-body ">
             <div class="d-flex justify-content-between align-items-center">
               <h5 class="m-0">Eventos guardados</h5>
               <button id="btnResetDemo" class="btn btn-sm btn-outline-danger">Restaurar demo</button>

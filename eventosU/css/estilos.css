@@ -1,5 +1,5 @@
 .body{
-    background: linear-gradient(to right, #300509, #232324, #3b546d);
+    background: linear-gradient(to right, #300509, #232324, #5e9bd8);
 }
 
 .grid{
@@ -13,9 +13,22 @@ display: grid;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
     text-align: center;
 }
+.card-text {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 15px;
+}
+.btn-primary {
+    background:linear-gradient(to right, #300509, #232324, #5e9bd8);;
+    color: white;
+    border: none;
+}
+
+
+
 
 .contenedor {
     background-color: #ffffff;
@@ -82,6 +95,7 @@ display: grid;
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    padding: 1rem;
 }
 
 .panel-asistentes {
@@ -89,7 +103,9 @@ display: grid;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    width: 900px;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
 }
 
 .selector-evento {
@@ -109,9 +125,13 @@ display: grid;
     text-align: center;
 }
 
-.tabla th {
-    background-color: #007BFF;
-    color: white;
+.tabla thead {
+    background: linear-gradient(to right, #300509, #232324, #5e9bd8);
+}
+
+.tabla thead th {
+    background: transparent;
+    color: #ffffff;
 }
 
 .btn-accion {
@@ -144,4 +164,47 @@ display: grid;
 
 .exportar:hover {
     opacity: 0.9;
+}
+/*formulario*/
+.boton{
+    background:linear-gradient(to right, #300509, #232324, #5e9bd8);;
+}
+/* Responsividad */
+@media (max-width: 576px) {
+    .panel-asistentes {
+        padding: 16px;
+    }
+
+    .tabla {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tabla th,
+    .tabla td {
+        font-size: 13px;
+        padding: 6px;
+    }
+
+    .selector-evento .label,
+    .selector-evento .input {
+        display: block;
+        width: 100%;
+    }
+
+    .contenedor-asistentes {
+        margin-top: 20px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+
+.lista {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
