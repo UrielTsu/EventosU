@@ -1,12 +1,8 @@
 .body{
     background: linear-gradient(to right, #300509, #232324, #5e9bd8);
+    font-family:'Courier New', Courier, monospace
 }
 
-.grid{
-display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
 
 /*estilos cards  */
 .card {
@@ -200,7 +196,6 @@ display: grid;
         padding-right: 0.5rem;
     }
 }
-
 
 .lista {
     background-color: #ffffff;
