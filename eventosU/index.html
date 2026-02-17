@@ -60,16 +60,25 @@
                     <form id="formInscripcion">
                         <input type="hidden" id="idEventoSeleccionado">
                         <div class="mb-3">
-                            <label class="form-label">Nombre Completo</label>
-                            <input type="text" id="nombreAsistente" class="form-control" required>
+                            <label for="nombreAsistente" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="nombreAsistente" required 
+                                    pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" 
+                                    title="Solo se permiten letras y espacios">
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" id="emailAsistente" class="form-control" required>
+                            <label for="emailAsistente" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="emailAsistente" required>
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Teléfono</label>
-                            <input type="tel" id="telefonoAsistente" class="form-control" required>
+                            <label for="telefonoAsistente" class="form-label">Teléfono (10 dígitos)</label>
+                            <input type="tel" class="form-control" id="telefonoAsistente" required 
+                                    maxlength="10" 
+                                    minlength="10" 
+                                    pattern="\d{10}" 
+                                    title="Deben ser exactamente 10 números"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Confirmar Inscripción</button>
                     </form>
